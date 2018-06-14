@@ -1,5 +1,5 @@
 ﻿$Path = ".\Bin\CPU-JayDDee\cpuminer-avx2.exe"
-$Uri = "https://github.com/JayDDee/cpuminer-opt/files/1884641/cpuminer-opt-3.8.6.1-windows.zip"
+$Uri = "https://github.com/JayDDee/cpuminer-opt/files/1996977/cpuminer-opt-3.8.8.1-windows.zip"
 
 $Commands = [PSCustomObject]@{
     #"bitcore" = "" #Bitcore
@@ -35,6 +35,7 @@ $Commands = [PSCustomObject]@{
     #"yescryptr8" = "" #Yescryptr8
     #"x16r" = "" #Ravencoin
     #"yescryptr16" = "" #Yenten
+    #"cryptonightv7" = "" #Cryptonightv7
 }
 
 $Name = (Get-Item $script:MyInvocation.MyCommand.Path).BaseName
