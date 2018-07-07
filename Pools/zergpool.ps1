@@ -30,29 +30,7 @@ $zergpool_Request | Get-Member -MemberType NoteProperty -ErrorAction Ignore | Se
     $zergpool_Fees = $zergpool_Request.$_.fees
     $zergpool_Workers = $zergpool_Request.$_.workers
 
-    $Divisor = 1000000
-	
-    switch($zergpool_Algorithm)
-    {
-        "equihash"{$Divisor /= 1000}
-        "blake2s"{$Divisor *= 1000}
-	"sha256"{$Divisor *= 1000}
-        "sha256t"{$Divisor *= 1000}
-        "blakecoin"{$Divisor *= 1000}
-        "decred"{$Divisor *= 1000}
-        "keccak"{$Divisor *= 1000}
-        "keccakc"{$Divisor *= 1000}
-        "vanilla"{$Divisor *= 1000}
-	"x11"{$Divisor *= 1000}
-	"scrypt"{$Divisor *= 1000}
-	"qubit"{$Divisor *= 1000}
-	"yescrypt"{$Divisor /= 1000}
-    	"yescryptr16"{$Divisor /= 1000}
-	"nist5"{$Divisor *= 1000}
-	"skein"{$Divisor *= 1000}
-	"x13"{$Divisor *= 1000}			
-    }
-
+    $Divisor = 1000000 * [Double]$ZergPool_Request.$_.mbtc_mh_factor
 			
     if((Get-Stat -Name "$($Name)_$($zergpool_Algorithm)_Profit") -eq $null){$Stat = Set-Stat -Name "$($Name)_$($zergpool_Algorithm)_Profit" -Value ([Double]$zergpool_Request.$_.estimate_last24h/$Divisor*(1-($zergpool_request.$_.fees/100)))}
     else{$Stat = Set-Stat -Name "$($Name)_$($zergpool_Algorithm)_Profit" -Value ([Double]$zergpool_Request.$_.estimate_current/$Divisor *(1-($zergpool_request.$_.fees/100)))}
